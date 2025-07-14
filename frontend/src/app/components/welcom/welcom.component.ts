@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class WelcomComponent {
   playerName: string = '';
 
-  constructor(private router: Router) { }
+  router = inject(Router);
 
   startGame() {
     const name = this.playerName.trim();

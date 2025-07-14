@@ -1,0 +1,71 @@
+[
+    {
+        "id": 1,
+        "type": "math",
+        "question": "What is 6 × 7?",
+        "correct": 42
+    },
+    {
+        "id": 2,
+        "type": "image-select",
+        "question": "Where is Luffy?",
+        "images": [
+            {
+                "url": "https://i.pinimg.com/736x/6f/cf/70/6fcf70c5575223373c14ddcc36a3ffb8.jpg",
+                "id": "img1"
+            },
+            {
+                "url": "https://i.pinimg.com/736x/1c/e4/eb/1ce4ebd3d1850f071c74adfc6aa79039.jpg",
+                "id": "img2"
+            },
+            {
+                "url": "https://i.pinimg.com/736x/c6/ef/8f/c6ef8f61e5431e8f13a161cadaf55918.jpg",
+                "id": "img3"
+            }
+        ],
+        "correct": [
+            "img1"
+        ]
+    },
+    {
+        "id": 3,
+        "type": "image-select",
+        "question": "Select all images with a cat",
+        "images": [
+            {
+                "url": "https://i.pinimg.com/736x/43/b8/f7/43b8f757efbe31ed48e6875165f3ee5d.jpg",
+                "id": "img1"
+            },
+            {
+                "url": "https://i.pinimg.com/736x/00/dc/31/00dc31f974be4e48a1f9c2403df182a0.jpg",
+                "id": "img2"
+            },
+            {
+                "url": "https://i.pinimg.com/736x/34/43/e8/3443e85ab81d1d98d31a331d6bba92d9.jpg",
+                "id": "img3"
+            }
+        ],
+        "correct": [
+            "img1",
+            "img2"
+        ]
+    },
+    {
+        "id": 4,
+        "type": "math",
+        "question": "What is 8 × 6?",
+        "correct": 48
+    },
+    {
+        "id": 5,
+        "type": "text",
+        "question": "Type the word 'elephant' backward.",
+        "correct": "tnahpele"
+    },
+    {
+        "id": 6,
+        "type": "text",
+        "question": "What is the largest planet in our solar system?",
+        "correct": "Jupiter"
+    }
+]
