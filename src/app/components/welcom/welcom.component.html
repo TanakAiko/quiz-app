@@ -1,1 +1,10 @@
-<p>welcom works!</p>
+<h2>Welcome to our quiz game</h2>
+
+<form #welcomeForm="ngForm" (ngSubmit)="startGame()">
+    <label for="name">Enter your name:</label>
+    <input type="text" id="name" name="playerName" [(ngModel)]="playerName" required>
+    
+    <br>
+    <p>Click on the button below to start the game</p>
+    <button type="submit" [disabled]="!welcomeForm.valid">Start Game</button>
+</form>
