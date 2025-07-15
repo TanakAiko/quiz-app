@@ -10,6 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class QuizComponent {
   playerName: string = '';
+  isLoading = false;
+  isSubmitting = false;
 
   route = inject(ActivatedRoute)
 

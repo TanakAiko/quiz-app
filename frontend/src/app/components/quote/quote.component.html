@@ -1,0 +1,31 @@
+@if (!isLoading && !showLevelTransition && currentQuote) {
+<div class="challenge-container">
+
+    <p>quote of the days</p>
+
+    <p>{{currentQuote.quote}}</p>
+    <form [formGroup]="quoteForm" (ngSubmit)="submitAuthor()">
+        <label for="authorName">Enter the author's name:</label>
+        <input type="text" id="authorName" placeholder="Author's name" formControlName="author" class="text-input">
+
+        <br>
+
+        <!-- Error Message -->
+        @if (errorMessage) {
+        <div class="error-message">
+            <span class="error-icon">⚠</span>
+            {{ errorMessage }}
+        </div>
+        }
+
+        <button type="submit" [disabled]="isSubmitting">Submit</button>
+    </form>
+
+    <br>
+
+    <form (ngSubmit)="skipQuote()">
+        <p>Click on the button below to pass to another one !</p>
+        <button type="submit">Skip</button>
+    </form>
+</div>
+}

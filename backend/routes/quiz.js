@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { distance } from 'fastest-levenshtein';
 const router = Router();
 import { readFileSync } from 'fs';
 
@@ -10,6 +11,31 @@ function loadJSON(path) {
     } catch (err) {
         console.error(`Error loading ${path}:`, err.message);
         return [];
+    }
+}
+
+function isAnswerValid(userAnswer, correctAnswer) {
+    if (!userAnswer || !correctAnswer) return false;
+
+    const normalizedUser = userAnswer.trim().toLowerCase();
+    const normalizedCorrect = correctAnswer.trim().toLowerCase();
+
+    console.log(`Checking answer: "${normalizedUser}" against correct answer: "${normalizedCorrect}"`);
+    
+
+    // ✅ Direct or partial match
+    if (
+        normalizedCorrect.includes(normalizedUser) ||
+        normalizedUser.includes(normalizedCorrect)
+    ) return true;
+
+    // ✅ Match any part of the correct name (like "spike", "spiegel")
+    const nameParts = normalizedCorrect.replace(/\s+/g, ' ').split(' ');
+
+    for (const part of nameParts) {
+        if (distance(normalizedUser, part) <= 2) {
+            return true;
+        }
     }
 }
 
@@ -88,6 +114,65 @@ router.post('/quiz', (req, res) => {
     }
 
     res.json({ success: isCorrect });
+});
+
+let quotes = []; // Holds the 5 quotes with authors
+
+router.get('/quotes', async (_, res) => {
+    console.log(`Fetching 5 quotes...`);
+    console.log(process.env.RAPID_API_KEY);
+
+    try {
+        const fetchedQuotes = [];
+
+        for (let i = 0; i < 5; i++) {
+            const response = await fetch('https://quotes-api12.p.rapidapi.com/quotes/anime', {
+                method: 'GET',
+                headers: {
+                    'X-RapidAPI-Key': process.env.RAPID_API_KEY,
+                    'X-RapidAPI-Host': 'quotes-api12.p.rapidapi.com'
+                }
+            });
+
+            const data = await response.json();
+            if (data && data.quote && data.author) {
+                fetchedQuotes.push(data);
+            }
+        }
+
+        quotes = fetchedQuotes; // Store the full quotes for answer validation
+
+        // Remove the author before sending to frontend
+        const safeQuotes = quotes.map((q, i) => ({
+            id: i,
+            quote: q.quote
+        }));
+
+        console.log(`Fetched ${safeQuotes.length} quotes successfully`);
+        res.json(safeQuotes);
+    } catch (err) {
+        console.error(`Error fetching quotes:`, err.message);
+        res.status(200).json(quotes.map((q, i) => ({ id: i, quote: q.quote })));
+    }
+});
+
+
+router.post('/quotes', (req, res) => {
+    const { id, answer } = req.body;
+    console.log(`Received answer for quote ID ${id}:`, answer);
+    console.log(`Quotes available:`, quotes);
+    
+    if (!answer || id == null || id < 0 || id >= quotes.length) {
+        console.log(`Invalid request data:`, req.body);
+        return res.status(400).json({ error: 'Missing data' });
+    }
+
+    const isCorrect = isAnswerValid(answer, quotes[id].author);
+
+    res.json({
+        success: isCorrect,
+        message: isCorrect ? '✅ Good answer!' : '❌ Try again!'
+    });
 });
 
 export default router;
