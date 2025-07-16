@@ -45,7 +45,9 @@ export class QuoteComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(value => {
         console.log('Form value changed:', value);
-        
+        if (value.author === null || value.author === undefined) {
+          return;
+        }
         this.stateService.setAnswer(this.currentLevel, value.author?.trim());
       });
 
@@ -123,20 +125,20 @@ export class QuoteComponent implements OnInit, OnDestroy {
         this.isSubmitting = false;
 
         console.log('Submission result:', result);
-        
+
 
         if (result.success) {
-          if (this.currentLevel < 5) {
+          if (this.currentLevel < 4) {
             this.showLevelTransition = true;
             setTimeout(() => {
               this.stateService.setCurrentLevel(this.currentLevel + 1);
               this.showLevelTransition = false;
-            }, 1500);
+            }, 1000);
           } else {
             // All levels completed
             setTimeout(() => {
               this.router.navigate(['/result']);
-            }, 2000);
+            }, 1500);
           }
         } else {
           this.errorMessage = result.message || 'Incorrect answer. Please try again.';

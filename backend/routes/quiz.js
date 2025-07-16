@@ -21,7 +21,7 @@ function isAnswerValid(userAnswer, correctAnswer) {
     const normalizedCorrect = correctAnswer.trim().toLowerCase();
 
     console.log(`Checking answer: "${normalizedUser}" against correct answer: "${normalizedCorrect}"`);
-    
+
 
     // ✅ Direct or partial match
     if (
@@ -37,6 +37,7 @@ function isAnswerValid(userAnswer, correctAnswer) {
             return true;
         }
     }
+    return false;
 }
 
 const challenges_l1 = loadJSON('./levels/1.json');
@@ -160,19 +161,22 @@ router.get('/quotes', async (_, res) => {
 router.post('/quotes', (req, res) => {
     const { id, answer } = req.body;
     console.log(`Received answer for quote ID ${id}:`, answer);
-    console.log(`Quotes available:`, quotes);
-    
+    console.log(`Quote:`, quotes[id]);
+
     if (!answer || id == null || id < 0 || id >= quotes.length) {
         console.log(`Invalid request data:`, req.body);
         return res.status(400).json({ error: 'Missing data' });
     }
 
     const isCorrect = isAnswerValid(answer, quotes[id].author);
-
-    res.json({
+    let resp = {
         success: isCorrect,
         message: isCorrect ? '✅ Good answer!' : '❌ Try again!'
-    });
+    }
+
+    console.log(resp);
+    
+    res.json(resp);
 });
 
 export default router;
