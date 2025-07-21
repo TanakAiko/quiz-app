@@ -44,19 +44,24 @@
       </div>
 
       <!-- Quote Card -->
-      <div class="quote-card card character-card">
+      <div class="quote-card card character-card animate-fade-in">
         <div class="card-body">
           <div class="quote-content">
             <div class="quote-character">
               <img src="/images/汉宫春_下扬州（晁冲之体）_文_李文冠（湖南）__一日清闲，向南门买菜，东海垂钩。_人间春山富丽，时雨飘浮。_桃蔬日渐，看白云、苍狗封侯。_天遣使、江湖不平，.jpeg" alt="Mystery Character" class="character-image mystery-character">
             </div>
             <div class="quote-icon">💭</div>
-            <blockquote class="quote-text speech-bubble">
+            <blockquote class="quote-text speech-bubble highlight-quote">
               "{{ currentQuote.quote }}"
             </blockquote>
             <div class="quote-attribution">
               <span class="quote-dash">—</span>
               <span class="quote-mystery">Who said this legendary quote?</span>
+            </div>
+            <!-- Author reveal (hidden by default, shown after correct answer) -->
+            <div class="quote-author-reveal" *ngIf="results[currentLevel] === true">
+              <span class="reveal-label">Answer:</span>
+              <span class="reveal-author">{{ currentQuote.author || 'Correct!' }}</span>
             </div>
           </div>
         </div>

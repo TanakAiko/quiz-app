@@ -1,263 +1,156 @@
 <div class="leaderboard-container">
-  <div class="container">
-    <div class="leaderboard-content animate-fade-in">
-      
-      <!-- Header -->
-      <div class="leaderboard-header">
-        <div class="header-content">
-          <h1 class="leaderboard-title">
-            <span class="title-icon">🏆</span>
-            Leaderboard
-          </h1>
-          <p class="leaderboard-subtitle">
-            See how you stack up against other quiz masters!
-          </p>
+    <div class="container">
+        <div
+            class="leaderboard-content animate-fade-in">
+
+            <!-- Header -->
+            <div class="leaderboard-header">
+                <div class="header-content">
+                    <h1 class="leaderboard-title">
+                        <span class="title-icon">🏆</span>
+                        Leaderboard
+                    </h1>
+                    <p class="leaderboard-subtitle">
+                        See how you stack up against other quiz masters!
+                    </p>
+                </div>
+
+                <div class="leaderboard-stats">
+                    <div class="stat-card">
+                        <span class="stat-number">1,247</span>
+                        <span class="stat-label">Total Players</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">15,892</span>
+                        <span class="stat-label">Quizzes Completed</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">73%</span>
+                        <span class="stat-label">Average Score</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top 3 Podium -->
+            <div class="podium-section">
+                <div
+                    class="podium">
+
+                    <!-- 2nd Place -->
+                    <div class="podium-position second">
+                        <div class="podium-player">
+                            <div class="player-avatar silver">
+                                <span class="avatar-text">AK</span>
+                            </div>
+                            <h3 class="player-name">Alex Kim</h3>
+                            <div class="player-score">
+                                <span class="score-number">2,847</span>
+                                <span class="score-label">points</span>
+                            </div>
+                            <div class="player-stats">
+                                <span class="stat">98% accuracy</span>
+                                <span class="stat">156 quizzes</span>
+                            </div>
+                        </div>
+                        <div class="podium-base second-place">
+                            <span class="position-number">2</span>
+                        </div>
+                    </div>
+
+                    <!-- 1st Place -->
+                    <div class="podium-position first">
+                        <div class="podium-player">
+                            <div class="player-avatar gold">
+                                <span class="avatar-text">SM</span>
+                                <div class="crown">👑</div>
+                            </div>
+                            <h3 class="player-name">Sarah Miller</h3>
+                            <div class="player-score">
+                                <span class="score-number">3,156</span>
+                                <span class="score-label">points</span>
+                            </div>
+                            <div class="player-stats">
+                                <span class="stat">99% accuracy</span>
+                                <span class="stat">189 quizzes</span>
+                            </div>
+                        </div>
+                        <div class="podium-base first-place">
+                            <span class="position-number">1</span>
+                        </div>
+                    </div>
+
+                    <!-- 3rd Place -->
+                    <div class="podium-position third">
+                        <div class="podium-player">
+                            <div class="player-avatar bronze">
+                                <span class="avatar-text">MJ</span>
+                            </div>
+                            <h3 class="player-name">Mike Johnson</h3>
+                            <div class="player-score">
+                                <span class="score-number">2,634</span>
+                                <span class="score-label">points</span>
+                            </div>
+                            <div class="player-stats">
+                                <span class="stat">96% accuracy</span>
+                                <span class="stat">142 quizzes</span>
+                            </div>
+                        </div>
+                        <div class="podium-base third-place">
+                            <span class="position-number">3</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Full Leaderboard Table -->
+            <div class="leaderboard-table-section">
+                <div class="table-header">
+                    <h2>Full Rankings</h2>
+                </div>
+
+                @if (isLoading) {
+                <div class="loading">Loading leaderboard...</div>
+                }
+                                                                
+                                                @if (error) {
+                <div class="error">{{ error }}</div>
+                }
+                                                                
+                                                @if (!isLoading && !error) {
+                <div class="leaderboard-table">
+                    <div class="table-header-row">
+                        <span class="col-rank">Rank</span>
+                        <span class="col-player">Player</span>
+                        <span class="col-score">Score</span>
+                        <span class="col-date">Date</span>
+                    </div>
+                    <div class="table-body">
+                        @for (entry of leaderboard; track entry) {
+                        <div class="table-row">
+                            <span class="col-rank">{{ leaderboard.indexOf(entry) + 1 }}</span>
+                            <span class="col-player">{{ entry.name }}</span>
+                            <span class="col-score">{{ entry.score }}</span>
+                            <span class="col-date">{{ entry.date | date:'short' }}</span>
+                        </div>
+                        }
+                    </div>
+                </div>
+                }
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="leaderboard-actions">
+                <a routerLink="/quote" class="btn btn-primary btn-lg">
+                    <span class="btn-icon">🎯</span>
+                    Take Quiz
+                </a>
+                <a routerLink="/" class="btn btn-secondary">
+                    <span class="btn-icon">🏠</span>
+                    Back to Home
+                </a>
+            </div>
+
         </div>
-        
-        <div class="leaderboard-stats">
-          <div class="stat-card">
-            <span class="stat-number">1,247</span>
-            <span class="stat-label">Total Players</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-number">15,892</span>
-            <span class="stat-label">Quizzes Completed</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-number">73%</span>
-            <span class="stat-label">Average Score</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Top 3 Podium -->
-      <div class="podium-section">
-        <div class="podium">
-          
-          <!-- 2nd Place -->
-          <div class="podium-position second">
-            <div class="podium-player">
-              <div class="player-avatar silver">
-                <span class="avatar-text">AK</span>
-              </div>
-              <h3 class="player-name">Alex Kim</h3>
-              <div class="player-score">
-                <span class="score-number">2,847</span>
-                <span class="score-label">points</span>
-              </div>
-              <div class="player-stats">
-                <span class="stat">98% accuracy</span>
-                <span class="stat">156 quizzes</span>
-              </div>
-            </div>
-            <div class="podium-base second-place">
-              <span class="position-number">2</span>
-            </div>
-          </div>
-
-          <!-- 1st Place -->
-          <div class="podium-position first">
-            <div class="podium-player">
-              <div class="player-avatar gold">
-                <span class="avatar-text">SM</span>
-                <div class="crown">👑</div>
-              </div>
-              <h3 class="player-name">Sarah Miller</h3>
-              <div class="player-score">
-                <span class="score-number">3,156</span>
-                <span class="score-label">points</span>
-              </div>
-              <div class="player-stats">
-                <span class="stat">99% accuracy</span>
-                <span class="stat">189 quizzes</span>
-              </div>
-            </div>
-            <div class="podium-base first-place">
-              <span class="position-number">1</span>
-            </div>
-          </div>
-
-          <!-- 3rd Place -->
-          <div class="podium-position third">
-            <div class="podium-player">
-              <div class="player-avatar bronze">
-                <span class="avatar-text">MJ</span>
-              </div>
-              <h3 class="player-name">Mike Johnson</h3>
-              <div class="player-score">
-                <span class="score-number">2,634</span>
-                <span class="score-label">points</span>
-              </div>
-              <div class="player-stats">
-                <span class="stat">96% accuracy</span>
-                <span class="stat">142 quizzes</span>
-              </div>
-            </div>
-            <div class="podium-base third-place">
-              <span class="position-number">3</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Full Leaderboard Table -->
-      <div class="leaderboard-table-section">
-        <div class="table-header">
-          <h2>Full Rankings</h2>
-          <div class="table-filters">
-            <button class="filter-btn active">All Time</button>
-            <button class="filter-btn">This Month</button>
-            <button class="filter-btn">This Week</button>
-          </div>
-        </div>
-
-        <div class="leaderboard-table">
-          <div class="table-header-row">
-            <span class="col-rank">Rank</span>
-            <span class="col-player">Player</span>
-            <span class="col-score">Score</span>
-            <span class="col-accuracy">Accuracy</span>
-            <span class="col-quizzes">Quizzes</span>
-            <span class="col-streak">Streak</span>
-          </div>
-
-          <div class="table-body">
-            
-            <div class="table-row highlight">
-              <span class="col-rank">
-                <span class="rank-number">1</span>
-                <span class="rank-medal">🥇</span>
-              </span>
-              <span class="col-player">
-                <div class="player-info">
-                  <div class="player-avatar-small gold">SM</div>
-                  <div class="player-details">
-                    <span class="player-name">Sarah Miller</span>
-                    <span class="player-level">Master</span>
-                  </div>
-                </div>
-              </span>
-              <span class="col-score">3,156</span>
-              <span class="col-accuracy">99%</span>
-              <span class="col-quizzes">189</span>
-              <span class="col-streak">🔥 23</span>
-            </div>
-
-            <div class="table-row">
-              <span class="col-rank">
-                <span class="rank-number">2</span>
-                <span class="rank-medal">🥈</span>
-              </span>
-              <span class="col-player">
-                <div class="player-info">
-                  <div class="player-avatar-small silver">AK</div>
-                  <div class="player-details">
-                    <span class="player-name">Alex Kim</span>
-                    <span class="player-level">Expert</span>
-                  </div>
-                </div>
-              </span>
-              <span class="col-score">2,847</span>
-              <span class="col-accuracy">98%</span>
-              <span class="col-quizzes">156</span>
-              <span class="col-streak">🔥 18</span>
-            </div>
-
-            <div class="table-row">
-              <span class="col-rank">
-                <span class="rank-number">3</span>
-                <span class="rank-medal">🥉</span>
-              </span>
-              <span class="col-player">
-                <div class="player-info">
-                  <div class="player-avatar-small bronze">MJ</div>
-                  <div class="player-details">
-                    <span class="player-name">Mike Johnson</span>
-                    <span class="player-level">Expert</span>
-                  </div>
-                </div>
-              </span>
-              <span class="col-score">2,634</span>
-              <span class="col-accuracy">96%</span>
-              <span class="col-quizzes">142</span>
-              <span class="col-streak">🔥 12</span>
-            </div>
-
-            <div class="table-row">
-              <span class="col-rank">
-                <span class="rank-number">4</span>
-              </span>
-              <span class="col-player">
-                <div class="player-info">
-                  <div class="player-avatar-small">LW</div>
-                  <div class="player-details">
-                    <span class="player-name">Lisa Wang</span>
-                    <span class="player-level">Advanced</span>
-                  </div>
-                </div>
-              </span>
-              <span class="col-score">2,398</span>
-              <span class="col-accuracy">94%</span>
-              <span class="col-quizzes">128</span>
-              <span class="col-streak">🔥 8</span>
-            </div>
-
-            <div class="table-row">
-              <span class="col-rank">
-                <span class="rank-number">5</span>
-              </span>
-              <span class="col-player">
-                <div class="player-info">
-                  <div class="player-avatar-small">DB</div>
-                  <div class="player-details">
-                    <span class="player-name">David Brown</span>
-                    <span class="player-level">Advanced</span>
-                  </div>
-                </div>
-              </span>
-              <span class="col-score">2,156</span>
-              <span class="col-accuracy">92%</span>
-              <span class="col-quizzes">115</span>
-              <span class="col-streak">🔥 5</span>
-            </div>
-
-            <!-- Your Position (if not in top 5) -->
-            <div class="table-row your-position">
-              <span class="col-rank">
-                <span class="rank-number">47</span>
-              </span>
-              <span class="col-player">
-                <div class="player-info">
-                  <div class="player-avatar-small you">YO</div>
-                  <div class="player-details">
-                    <span class="player-name">You</span>
-                    <span class="player-level">Beginner</span>
-                  </div>
-                </div>
-              </span>
-              <span class="col-score">156</span>
-              <span class="col-accuracy">80%</span>
-              <span class="col-quizzes">3</span>
-              <span class="col-streak">🔥 1</span>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <!-- Action Buttons -->
-      <div class="leaderboard-actions">
-        <a routerLink="/quote" class="btn btn-primary btn-lg">
-          <span class="btn-icon">🎯</span>
-          Take Quiz
-        </a>
-        <a routerLink="/" class="btn btn-secondary">
-          <span class="btn-icon">🏠</span>
-          Back to Home
-        </a>
-      </div>
-
     </div>
-  </div>
 </div>

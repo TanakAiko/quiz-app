@@ -104,10 +104,56 @@
 /* Quote Card */
 .quote-card {
   margin-bottom: var(--space-8);
-  background: linear-gradient(135deg, var(--primary-50), var(--secondary-50));
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
   border: 4px solid var(--primary-400);
   position: relative;
   overflow: hidden;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  animation: fadeInCard 0.8s ease;
+}
+
+@keyframes fadeInCard {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.highlight-quote {
+  background: linear-gradient(90deg, #fef9c3 0%, #f0fdfa 100%);
+  border: 3px solid #fbbf24;
+  color: #1e293b;
+  font-size: 1.7rem;
+  font-weight: 700;
+  padding: 1.5rem 2rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 12px 0 rgba(251, 191, 36, 0.08);
+  margin-bottom: 1rem;
+  transition: box-shadow 0.3s;
+}
+
+.quote-card .quote-author-reveal {
+  margin-top: 1.2rem;
+  padding: 0.7rem 1.2rem;
+  background: linear-gradient(90deg, #d1fae5 0%, #f0fdfa 100%);
+  border: 2px solid #34d399;
+  border-radius: 0.8rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #047857;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 1px 6px 0 rgba(52, 211, 153, 0.08);
+  animation: fadeInCard 0.7s;
+}
+
+.quote-card .reveal-label {
+  font-weight: 700;
+  color: #059669;
+}
+
+.quote-card .reveal-author {
+  font-style: italic;
+  color: #047857;
 }
 
 .quote-card::before {
@@ -417,6 +463,20 @@
   .result-item {
     min-width: 60px;
     padding: var(--space-2);
+  }
+}
+
+@media (max-width: 600px) {
+  .quote-card {
+    padding: 0.5rem;
+  }
+  .highlight-quote {
+    font-size: 1.1rem;
+    padding: 1rem 0.7rem;
+  }
+  .quote-card .quote-author-reveal {
+    font-size: 0.95rem;
+    padding: 0.5rem 0.7rem;
   }
 }
 

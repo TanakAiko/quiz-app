@@ -33,13 +33,13 @@
           <div class="score-display">
             <div class="score-circle">
               <div class="score-inner">
-                <span class="score-number">4</span>
-                <span class="score-total">/ 5</span>
+                <span class="score-number">{{ correct }}</span>
+                <span class="score-total">/ {{ total }}</span>
               </div>
             </div>
             
             <div class="score-details">
-              <div class="score-percentage">80%</div>
+              <div class="score-percentage">{{ (correct / total * 100) | number:'1.0-0' }}%</div>
               <div class="score-label">Success Rate</div>
             </div>
           </div>
@@ -47,20 +47,18 @@
           <div class="performance-stats">
             <div class="stat-row">
               <span class="stat-label">Correct Answers:</span>
-              <span class="stat-value correct">4 ✅</span>
+              <span class="stat-value correct">{{ correct }} ✅</span>
             </div>
             <div class="stat-row">
               <span class="stat-label">Incorrect Answers:</span>
-              <span class="stat-value incorrect">1 ❌</span>
+              <span class="stat-value incorrect">{{ incorrect }} ❌</span>
             </div>
+            @if (timeTaken !== null) {
             <div class="stat-row">
               <span class="stat-label">Time Taken:</span>
-              <span class="stat-value">2m 34s ⏱️</span>
+              <span class="stat-value">{{ (timeTaken / 60) | number:'1.0-0' }}m {{ (timeTaken % 60) | number:'2.0-0' }}s ⏱️</span>
             </div>
-            <div class="stat-row">
-              <span class="stat-label">Difficulty:</span>
-              <span class="stat-value">Medium 📊</span>
-            </div>
+            }
           </div>
         </div>
       </div>
@@ -74,106 +72,76 @@
             <span class="badge-name">First Try</span>
             <span class="badge-desc">Completed your first quiz</span>
           </div>
-          
+          @if (correct >= 4) {
           <div class="badge-item earned">
             <span class="badge-icon">📚</span>
             <span class="badge-name">Quote Scholar</span>
             <span class="badge-desc">Got 4+ quotes correct</span>
           </div>
-          
-          <div class="badge-item">
+          }
+          @if (correct === total) {
+          <div class="badge-item earned">
             <span class="badge-icon">🏆</span>
             <span class="badge-name">Perfect Score</span>
             <span class="badge-desc">Get all answers correct</span>
           </div>
+          }
           
-          <div class="badge-item">
+          @if (timeTaken !== null && timeTaken < 120) {
+          <div class="badge-item earned">
             <span class="badge-icon">⚡</span>
             <span class="badge-name">Speed Demon</span>
             <span class="badge-desc">Complete in under 2 minutes</span>
           </div>
+          }
+         
         </div>
       </div>
+
+      <!-- Submit Score to Leaderboard -->
+      @if (!scoreSubmitted) {
+      <div class="submit-score-section">
+        <form (ngSubmit)="submitScore()" class="submit-score-form">
+          <label for="playerName">Enter your name to appear on the leaderboard:</label>
+          <input id="playerName" [(ngModel)]="playerName" name="playerName" required [disabled]="isSubmitting" />
+          <button type="submit" [disabled]="isSubmitting || !playerName.trim()" class="btn btn-primary btn-lg">
+            {{ isSubmitting ? 'Submitting...' : 'Submit Score' }}
+          </button>
+          @if (submitError) {
+          <div class="error">{{ submitError }}</div>
+          }
+        </form>
+      </div>
+      }
+      @if (scoreSubmitted) {
+      <div class="submit-success">
+        <div class="alert alert-success">Your score has been submitted to the leaderboard!</div>
+      </div>
+      }
 
       <!-- Detailed Results -->
       <div class="detailed-results">
         <h3>Question Breakdown</h3>
         <div class="questions-list">
-          
-          <div class="question-item correct">
-            <div class="question-header">
-              <span class="question-number">1</span>
-              <span class="question-status">✅</span>
-            </div>
-            <div class="question-content">
-              <p class="question-quote">"I'm gonna be the Pirate King!"</p>
-              <div class="question-answer">
-                <span class="answer-label">Your answer:</span>
-                <span class="answer-text correct">Monkey D. Luffy</span>
+          @for (key of (quotes | keyvalue); track key) {
+            <div class="question-item" [ngClass]="{'correct': results[+key.key] === true, 'incorrect': results[+key.key] === false}">
+              <div class="question-header">
+                <span class="question-number">{{ +key.key + 1 }}</span>
+                <span class="question-status">
+                  {{ results[+key.key] === true ? '✅' : results[+key.key] === false ? '❌' : '⏳' }}
+                </span>
+              </div>
+              <div class="question-content">
+                <p class="question-quote">"{{ quotes[+key.key]?.quote }}"</p>
+                <div class="question-answer">
+                  <span class="answer-label">Your answer:</span>
+                  <span class="answer-text" [ngClass]="{'correct': results[+key.key] === true, 'incorrect': results[+key.key] === false}">
+                    {{ answers[+key.key] || '—' }}
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
-
-          <div class="question-item correct">
-            <div class="question-header">
-              <span class="question-number">2</span>
-              <span class="question-status">✅</span>
-            </div>
-            <div class="question-content">
-              <p class="question-quote">"I'll take a potato chip... and eat it!"</p>
-              <div class="question-answer">
-                <span class="answer-label">Your answer:</span>
-                <span class="answer-text correct">Light Yagami</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="question-item incorrect">
-            <div class="question-header">
-              <span class="question-number">3</span>
-              <span class="question-status">❌</span>
-            </div>
-            <div class="question-content">
-              <p class="question-quote">"People die when they are killed."</p>
-              <div class="question-answer">
-                <span class="answer-label">Your answer:</span>
-                <span class="answer-text incorrect">Naruto</span>
-              </div>
-              <div class="correct-answer">
-                <span class="correct-label">Correct answer:</span>
-                <span class="correct-text">Shirou Emiya</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="question-item correct">
-            <div class="question-header">
-              <span class="question-number">4</span>
-              <span class="question-status">✅</span>
-            </div>
-            <div class="question-content">
-              <p class="question-quote">"I am not a gun. I am not a sword. I am Vash the Stampede!"</p>
-              <div class="question-answer">
-                <span class="answer-label">Your answer:</span>
-                <span class="answer-text correct">Vash</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="question-item correct">
-            <div class="question-header">
-              <span class="question-number">5</span>
-              <span class="question-status">✅</span>
-            </div>
-            <div class="question-content">
-              <p class="question-quote">"The only one who can beat me is me."</p>
-              <div class="question-answer">
-                <span class="answer-label">Your answer:</span>
-                <span class="answer-text correct">Aomine Daiki</span>
-              </div>
-            </div>
-          </div>
-
+          }
         </div>
       </div>
 

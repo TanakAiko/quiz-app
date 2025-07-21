@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { distance } from 'fastest-levenshtein';
 const router = Router();
-import { readFileSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync } from 'fs';
 
 // Function to load JSON data from a file
 function loadJSON(path) {
@@ -177,6 +177,55 @@ router.post('/quotes', (req, res) => {
     console.log(resp);
     
     res.json(resp);
+});
+
+// Leaderboard file path
+const LEADERBOARD_PATH = './leaderboard.json';
+
+// Helper to load leaderboard
+function loadLeaderboard() {
+    if (!existsSync(LEADERBOARD_PATH)) return [];
+    try {
+        const raw = readFileSync(LEADERBOARD_PATH);
+        return JSON.parse(raw);
+    } catch (err) {
+        console.error('Error loading leaderboard:', err.message);
+        return [];
+    }
+}
+
+// Helper to save leaderboard
+function saveLeaderboard(data) {
+    try {
+        writeFileSync(LEADERBOARD_PATH, JSON.stringify(data, null, 2));
+    } catch (err) {
+        console.error('Error saving leaderboard:', err.message);
+    }
+}
+
+// GET leaderboard
+router.get('/leaderboard', (req, res) => {
+    const leaderboard = loadLeaderboard();
+    res.json(leaderboard);
+});
+
+// POST new score to leaderboard
+router.post('/leaderboard', (req, res) => {
+    const { name, score, time, date } = req.body;
+    if (!name || typeof score !== 'number') {
+        return res.status(400).json({ error: 'Missing name or score' });
+    }
+    const leaderboard = loadLeaderboard();
+    const entry = {
+        name,
+        score,
+        time: time || null,
+        date: date || new Date().toISOString()
+    };
+    leaderboard.push(entry);
+    leaderboard.sort((a, b) => b.score - a.score || (a.time || 0) - (b.time || 0));
+    saveLeaderboard(leaderboard.slice(0, 100)); // Keep top 100
+    res.json({ success: true, leaderboard: leaderboard.slice(0, 100) });
 });
 
 export default router;
