@@ -1,60 +1,64 @@
-<div class="welcome-container">
+<div class="welcome-container action-lines">
   <div class="container-sm">
-    <div class="welcome-hero">
-      <div class="hero-content animate-fade-in">
+    <div class="welcome-hero animate-bounce-in">
+      <div class="hero-content">
         <div class="hero-icon">
-          <span class="icon-brain">🧠</span>
+          <img src="/images/Luffy _ Desktop Wallpaper.jpeg" alt="Luffy" class="hero-character">
           <span class="icon-sparkle">✨</span>
         </div>
         
         <h1 class="hero-title">
-          Welcome to <span class="gradient-text">QuizMaster</span>
+          Welcome to <span class="display-title">AnimeQuiz</span>
         </h1>
         
-        <p class="hero-description">
-          Challenge your mind with our interactive quiz platform. Test your knowledge, 
-          compete with others, and discover fascinating quotes from your favorite characters!
+        <p class="hero-description speech-bubble">
+          🌟 Embark on an epic adventure through the world of anime and manga! 
+          Test your knowledge, challenge your limits, and prove you're the ultimate otaku! 
+          Are you ready to become a legend? ⚡
         </p>
         
         <div class="features-grid">
-          <div class="feature-card">
+          <div class="feature-card manga-panel">
             <span class="feature-icon">🎯</span>
-            <h3>Multiple Levels</h3>
-            <p>Progressive difficulty to challenge every skill level</p>
+            <h3>Epic Challenges</h3>
+            <p>Multiple difficulty levels that will test even the most seasoned anime fans!</p>
           </div>
           
-          <div class="feature-card">
+          <div class="feature-card manga-panel">
             <span class="feature-icon">💭</span>
-            <h3>Quote Challenges</h3>
-            <p>Guess the authors of inspiring anime quotes</p>
+            <h3>Quote Mastery</h3>
+            <p>Can you identify the legendary quotes from your favorite anime characters?</p>
           </div>
           
-          <div class="feature-card">
+          <div class="feature-card manga-panel">
             <span class="feature-icon">🏆</span>
-            <h3>Leaderboard</h3>
-            <p>Compete with others and track your progress</p>
+            <h3>Hall of Fame</h3>
+            <p>Compete with fellow otakus and claim your spot among the anime masters!</p>
           </div>
         </div>
       </div>
       
       <div class="hero-form animate-fade-in">
-        <div class="card">
+        <div class="card character-card">
           <div class="card-header text-center">
-            <h2>Ready to Start?</h2>
-            <p>Enter your name and begin your quiz journey!</p>
+            <div class="form-character">
+              <img src="/images/Fallen angels.jpeg" alt="Anime Character" class="character-image">
+            </div>
+            <h2>Ready for Adventure?</h2>
+            <p class="speech-bubble">Enter your hero name and begin your quest!</p>
           </div>
           
           <div class="card-body">
             <form #welcomeForm="ngForm" (ngSubmit)="startGame()" class="welcome-form">
               <div class="form-group">
-                <label for="name">Your Name</label>
+                <label for="name">🎌 Your Hero Name</label>
                 <input 
                   type="text" 
                   id="name" 
                   name="playerName" 
                   [(ngModel)]="playerName" 
                   required
-                  placeholder="Enter your name here..."
+                  placeholder="Enter your legendary name..."
                   class="name-input"
                 >
               </div>
@@ -62,10 +66,10 @@
               <button 
                 type="submit" 
                 [disabled]="!welcomeForm.valid" 
-                class="btn btn-primary btn-lg start-button"
+                class="btn btn-power btn-lg start-button"
               >
                 <span class="button-icon">🚀</span>
-                Start Your Journey
+                Begin Your Journey!
               </button>
             </form>
           </div>
@@ -73,23 +77,27 @@
       </div>
     </div>
     
-    <div class="stats-section">
+    <div class="stats-section animate-fade-in">
       <div class="stats-grid">
-        <div class="stat-item">
+        <div class="stat-item manga-panel">
           <span class="stat-number">1000+</span>
-          <span class="stat-label">Questions</span>
+          <span class="stat-label">Epic Questions</span>
+          <span class="stat-icon">📚</span>
         </div>
-        <div class="stat-item">
+        <div class="stat-item manga-panel">
           <span class="stat-number">50+</span>
-          <span class="stat-label">Categories</span>
+          <span class="stat-label">Anime Series</span>
+          <span class="stat-icon">🎌</span>
         </div>
-        <div class="stat-item">
+        <div class="stat-item manga-panel">
           <span class="stat-number">10K+</span>
-          <span class="stat-label">Players</span>
+          <span class="stat-label">Heroes</span>
+          <span class="stat-icon">👥</span>
         </div>
-        <div class="stat-item">
+        <div class="stat-item manga-panel">
           <span class="stat-number">24/7</span>
-          <span class="stat-label">Available</span>
+          <span class="stat-label">Adventure Time</span>
+          <span class="stat-icon">⏰</span>
         </div>
       </div>
     </div>

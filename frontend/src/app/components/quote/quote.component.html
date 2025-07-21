@@ -1,35 +1,35 @@
-<div class="quote-container">
+<div class="quote-container action-lines">
   <div class="container-sm">
     <!-- Loading State -->
     @if (isLoading) {
-    <div class="loading-state">
+    <div class="loading-state manga-panel">
       <div class="loading-spinner">
-        <div class="spinner"></div>
+        <div class="spinner loading-power"></div>
       </div>
-      <h2>Loading Quotes...</h2>
-      <p>Preparing your challenge</p>
+      <h2>Loading Epic Quotes...</h2>
+      <p class="speech-bubble">Preparing your legendary challenge! ⚡</p>
     </div>
     }
 
     <!-- Level Transition -->
     @if (showLevelTransition) {
-    <div class="transition-state">
+    <div class="transition-state manga-panel">
       <div class="success-animation">
         <span class="success-icon">🎉</span>
       </div>
-      <h2>Excellent!</h2>
-      <p>Moving to the next quote...</p>
+      <h2>Incredible!</h2>
+      <p class="speech-bubble">Moving to the next epic quote... 🌟</p>
     </div>
     }
 
     <!-- Main Quiz Interface -->
     @if (!isLoading && !showLevelTransition && currentQuote) {
-    <div class="quiz-interface animate-fade-in">
+    <div class="quiz-interface animate-bounce-in">
       <!-- Progress Header -->
-      <div class="progress-header">
+      <div class="progress-header manga-panel">
         <div class="level-info">
           <span class="level-badge">Quote {{ currentLevel + 1 }} of 5</span>
-          <h1 class="quiz-title">Quote Challenge</h1>
+          <h1 class="quiz-title">🎌 Quote Challenge</h1>
         </div>
         
         <div class="progress-container">
@@ -44,16 +44,19 @@
       </div>
 
       <!-- Quote Card -->
-      <div class="quote-card card">
+      <div class="quote-card card character-card">
         <div class="card-body">
           <div class="quote-content">
+            <div class="quote-character">
+              <img src="/images/汉宫春_下扬州（晁冲之体）_文_李文冠（湖南）__一日清闲，向南门买菜，东海垂钩。_人间春山富丽，时雨飘浮。_桃蔬日渐，看白云、苍狗封侯。_天遣使、江湖不平，.jpeg" alt="Mystery Character" class="character-image mystery-character">
+            </div>
             <div class="quote-icon">💭</div>
-            <blockquote class="quote-text">
+            <blockquote class="quote-text speech-bubble">
               "{{ currentQuote.quote }}"
             </blockquote>
             <div class="quote-attribution">
               <span class="quote-dash">—</span>
-              <span class="quote-mystery">Who said this?</span>
+              <span class="quote-mystery">Who said this legendary quote?</span>
             </div>
           </div>
         </div>
@@ -61,16 +64,16 @@
 
       <!-- Answer Form -->
       <div class="answer-section">
-        <form [formGroup]="quoteForm" (ngSubmit)="submitAuthor()" class="answer-form">
+        <form [formGroup]="quoteForm" (ngSubmit)="submitAuthor()" class="answer-form manga-panel">
           <div class="form-group">
             <label for="authorName" class="answer-label">
               <span class="label-icon">✍️</span>
-              Enter the author's name:
+              Enter the hero's name:
             </label>
             <input 
               type="text" 
               id="authorName" 
-              placeholder="Type the author's name..." 
+              placeholder="Type the legendary character's name..." 
               formControlName="author" 
               class="answer-input"
               [class.error]="errorMessage"
@@ -90,14 +93,14 @@
             <button 
               type="submit" 
               [disabled]="isSubmitting || !quoteForm.get('author')?.value?.trim()" 
-              class="btn btn-primary btn-lg submit-btn"
+              class="btn btn-power btn-lg submit-btn"
             >
               @if (isSubmitting) {
-                <span class="loading"></span>
+                <span class="loading loading-power"></span>
                 Checking...
               } @else {
                 <span class="btn-icon">🎯</span>
-                Submit Answer
+                Submit Answer!
               }
             </button>
             
@@ -114,11 +117,11 @@
       </div>
 
       <!-- Results Summary -->
-      @if (Object.keys(results).length > 0) {
-      <div class="results-summary">
-        <h3>Your Progress</h3>
+      @if (getObjectKeys(results).length > 0) {
+      <div class="results-summary manga-panel">
+        <h3>🏆 Your Progress</h3>
         <div class="results-grid">
-          @for (result of Object.keys(results); track result) {
+          @for (result of getObjectKeys(results); track result) {
           <div class="result-item" [class.correct]="results[+result]" [class.incorrect]="results[+result] === false">
             <span class="result-number">{{ +result + 1 }}</span>
             <span class="result-status">
@@ -134,11 +137,11 @@
       <div class="quick-actions">
         <button (click)="restart()" class="btn btn-secondary">
           <span class="btn-icon">🔄</span>
-          Restart Quiz
+          Restart Quest
         </button>
         <button (click)="goHome()" class="btn btn-secondary">
           <span class="btn-icon">🏠</span>
-          Go Home
+          Return Home
         </button>
       </div>
     </div>

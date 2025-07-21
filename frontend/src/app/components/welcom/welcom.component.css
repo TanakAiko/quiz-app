@@ -4,6 +4,7 @@
   flex-direction: column;
   justify-content: center;
   padding: var(--space-8) 0;
+  position: relative;
 }
 
 .welcome-hero {
@@ -23,17 +24,34 @@
 .hero-icon {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
-  font-size: 3rem;
+  gap: var(--space-4);
   margin-bottom: var(--space-4);
+  position: relative;
 }
 
-.icon-brain {
-  animation: pulse 2s infinite;
+.hero-character {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: var(--border-manga);
+  border-color: var(--primary-500);
+  object-fit: cover;
+  box-shadow: var(--shadow-power);
+  animation: power-pulse 2s infinite;
+  transition: all var(--transition-bounce);
+}
+
+.hero-character:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 0 30px var(--primary-400);
 }
 
 .icon-sparkle {
+  font-size: 3rem;
   animation: spin 3s linear infinite;
+  position: absolute;
+  top: -10px;
+  right: -10px;
 }
 
 .hero-title {
@@ -41,21 +59,32 @@
   font-weight: 700;
   line-height: 1.1;
   margin: 0;
-  color: var(--neutral-900);
+  color: var(--manga-black);
+  text-shadow: 3px 3px 0px rgba(255, 255, 255, 0.8);
 }
 
-.gradient-text {
-  background: linear-gradient(135deg, var(--primary-500), var(--secondary-500));
+.display-title {
+  font-size: 3.2rem;
+  background: linear-gradient(45deg, var(--primary-500), var(--secondary-500), var(--accent-500));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  font-family: var(--font-family-display);
+  animation: power-pulse 2s ease-in-out infinite alternate;
 }
 
 .hero-description {
   font-size: 1.125rem;
-  color: var(--neutral-600);
   line-height: 1.6;
   margin: 0;
+  background: rgba(255, 255, 255, 0.9);
+  border: 3px solid var(--primary-400);
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+
+.hero-description::after {
+  border-top-color: rgba(255, 255, 255, 0.9);
 }
 
 .features-grid {
@@ -71,26 +100,28 @@
   gap: var(--space-3);
   padding: var(--space-4);
   background: white;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  transition: all var(--transition-fast);
+  transition: all var(--transition-bounce);
+  cursor: pointer;
 }
 
 .feature-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateX(4px);
+  transform: translateX(8px) rotate(1deg);
+  box-shadow: 8px 8px 0px var(--primary-500);
 }
 
 .feature-icon {
-  font-size: 1.5rem;
+  font-size: 2rem;
   flex-shrink: 0;
+  animation: manga-pop 2s ease-in-out infinite;
 }
 
 .feature-card h3 {
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.125rem;
+  font-weight: 700;
   margin: 0 0 var(--space-1) 0;
-  color: var(--neutral-800);
+  color: var(--manga-black);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .feature-card p {
@@ -98,6 +129,7 @@
   color: var(--neutral-600);
   margin: 0;
   line-height: 1.4;
+  font-weight: 500;
 }
 
 .hero-form {
@@ -110,6 +142,26 @@
   max-width: 400px;
 }
 
+.form-character {
+  margin-bottom: var(--space-4);
+}
+
+.character-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: var(--border-manga);
+  border-color: var(--secondary-500);
+  object-fit: cover;
+  box-shadow: var(--shadow-power);
+  transition: all var(--transition-bounce);
+}
+
+.character-image:hover {
+  transform: scale(1.1) rotate(-5deg);
+  box-shadow: 0 0 25px var(--secondary-400);
+}
+
 .welcome-form {
   display: flex;
   flex-direction: column;
@@ -120,14 +172,14 @@
   font-size: 1.125rem;
   padding: var(--space-4);
   text-align: center;
-  border: 2px solid var(--neutral-200);
-  transition: all var(--transition-fast);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .name-input:focus {
-  border-color: var(--primary-500);
-  box-shadow: 0 0 0 3px var(--primary-100);
-  transform: scale(1.02);
+  transform: scale(1.05);
+  box-shadow: var(--shadow-power);
 }
 
 .start-button {
@@ -135,6 +187,9 @@
   padding: var(--space-4) var(--space-8);
   position: relative;
   overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
 }
 
 .start-button::before {
@@ -144,7 +199,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
   transition: left 0.5s;
 }
 
@@ -153,15 +208,18 @@
 }
 
 .button-icon {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+  animation: bounce-in 1s ease-in-out infinite;
 }
 
 .stats-section {
   margin-top: var(--space-16);
   padding: var(--space-8);
-  background: white;
+  background: rgba(255, 255, 255, 0.9);
   border-radius: var(--radius-2xl);
-  box-shadow: var(--shadow-lg);
+  border: var(--border-manga);
+  box-shadow: var(--shadow-manga);
+  backdrop-filter: blur(10px);
 }
 
 .stats-grid {
@@ -174,19 +232,38 @@
   text-align: center;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--space-2);
+  padding: var(--space-4);
+  background: white;
+  transition: all var(--transition-bounce);
+  cursor: pointer;
+  position: relative;
+}
+
+.stat-item:hover {
+  transform: translateY(-4px) rotate(2deg);
+  box-shadow: 6px 6px 0px var(--accent-500);
 }
 
 .stat-number {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
   color: var(--primary-600);
+  text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.8);
 }
 
 .stat-label {
   font-size: 0.875rem;
   color: var(--neutral-600);
-  font-weight: 500;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-icon {
+  font-size: 1.5rem;
+  animation: power-pulse 2s ease-in-out infinite alternate;
 }
 
 /* Responsive Design */
@@ -200,6 +277,10 @@
   .hero-title {
     font-size: 2.5rem;
   }
+  
+  .display-title {
+    font-size: 2.8rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -211,8 +292,22 @@
     font-size: 2rem;
   }
   
+  .display-title {
+    font-size: 2.2rem;
+  }
+  
   .hero-description {
     font-size: 1rem;
+  }
+  
+  .hero-character {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .character-image {
+    width: 80px;
+    height: 80px;
   }
   
   .features-grid {
@@ -229,17 +324,32 @@
   }
   
   .stat-number {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
 }
 
 @media (max-width: 480px) {
   .hero-icon {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  
+  .hero-character {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .icon-sparkle {
     font-size: 2rem;
+    position: static;
   }
   
   .hero-title {
     font-size: 1.75rem;
+  }
+  
+  .display-title {
+    font-size: 1.9rem;
   }
   
   .stats-grid {

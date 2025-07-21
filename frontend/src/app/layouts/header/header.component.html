@@ -2,19 +2,25 @@
   <div class="container">
     <div class="header-content">
       <div class="logo">
+        <div class="logo-character">
+          <img src="/images/Luffy _ Desktop Wallpaper.jpeg" alt="Luffy" class="character-avatar">
+        </div>
         <h1 class="logo-text">
-          <span class="logo-icon">🧠</span>
-          QuizMaster
+          <span class="logo-icon">⚡</span>
+          <span class="display-title">AnimeQuiz</span>
         </h1>
       </div>
       <nav class="nav">
-        <a routerLink="/" class="nav-link" routerLinkActive="nav-link-active" [routerLinkActiveOptions]="{exact: true}">
+        <a routerLink="/" class="nav-link speech-bubble-nav" routerLinkActive="nav-link-active" [routerLinkActiveOptions]="{exact: true}">
+          <span class="nav-icon">🏠</span>
           Home
         </a>
-        <a routerLink="/quote" class="nav-link" routerLinkActive="nav-link-active">
+        <a routerLink="/quote" class="nav-link speech-bubble-nav" routerLinkActive="nav-link-active">
+          <span class="nav-icon">💭</span>
           Quote Quiz
         </a>
-        <a routerLink="/leaderboard" class="nav-link" routerLinkActive="nav-link-active">
+        <a routerLink="/leaderboard" class="nav-link speech-bubble-nav" routerLinkActive="nav-link-active">
+          <span class="nav-icon">🏆</span>
           Leaderboard
         </a>
       </nav>

@@ -1,6 +1,7 @@
 .quote-container {
   min-height: calc(100vh - 200px);
   padding: var(--space-8) 0;
+  position: relative;
 }
 
 /* Loading State */
@@ -13,12 +14,14 @@
   text-align: center;
   min-height: 400px;
   gap: var(--space-6);
+  background: white;
+  padding: var(--space-8);
 }
 
 .loading-spinner {
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
 }
 
 .spinner {
@@ -30,15 +33,14 @@
   animation: spin 1s linear infinite;
 }
 
-.success-animation {
-  font-size: 4rem;
-  animation: bounce 0.6s ease-in-out;
+.loading-power {
+  border-top-color: var(--power-glow);
+  box-shadow: 0 0 20px var(--power-glow);
 }
 
-@keyframes bounce {
-  0%, 20%, 60%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-20px); }
-  80% { transform: translateY(-10px); }
+.success-animation {
+  font-size: 5rem;
+  animation: bounce-in 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 /* Progress Header */
@@ -49,8 +51,6 @@
   margin-bottom: var(--space-8);
   padding: var(--space-6);
   background: white;
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-md);
 }
 
 .level-info {
@@ -62,20 +62,27 @@
 .level-badge {
   display: inline-flex;
   align-items: center;
-  padding: var(--space-1) var(--space-3);
-  background: var(--primary-100);
-  color: var(--primary-700);
+  padding: var(--space-2) var(--space-4);
+  background: linear-gradient(135deg, var(--primary-100), var(--primary-200));
+  color: var(--primary-800);
   border-radius: var(--radius-full);
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.875rem;
+  font-weight: 700;
   width: fit-content;
+  border: 2px solid var(--primary-400);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: var(--shadow-manga);
 }
 
 .quiz-title {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: 700;
   margin: 0;
-  color: var(--neutral-900);
+  color: var(--manga-black);
+  text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .progress-container {
@@ -89,52 +96,91 @@
   font-size: 0.875rem;
   color: var(--neutral-600);
   text-align: right;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 /* Quote Card */
 .quote-card {
   margin-bottom: var(--space-8);
   background: linear-gradient(135deg, var(--primary-50), var(--secondary-50));
-  border: 2px solid var(--primary-100);
+  border: 4px solid var(--primary-400);
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-card::before {
+  background: linear-gradient(90deg, var(--primary-500), var(--secondary-500), var(--accent-500));
+  height: 6px;
 }
 
 .quote-content {
   text-align: center;
   padding: var(--space-8);
+  position: relative;
+}
+
+.quote-character {
+  margin-bottom: var(--space-4);
+}
+
+.mystery-character {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: var(--border-manga);
+  border-color: var(--secondary-500);
+  object-fit: cover;
+  box-shadow: var(--shadow-power);
+  filter: blur(2px) brightness(0.7);
+  transition: all var(--transition-bounce);
+}
+
+.mystery-character:hover {
+  filter: blur(1px) brightness(0.8);
+  transform: scale(1.05);
 }
 
 .quote-icon {
   font-size: 3rem;
   margin-bottom: var(--space-4);
-  opacity: 0.7;
+  opacity: 0.8;
+  animation: power-pulse 2s infinite;
 }
 
 .quote-text {
   font-size: 1.5rem;
   font-style: italic;
   line-height: 1.6;
-  color: var(--neutral-800);
+  color: var(--manga-black);
   margin: 0 0 var(--space-6) 0;
   position: relative;
+  background: rgba(255, 255, 255, 0.9);
+  border: 3px solid var(--secondary-400);
+  font-weight: 600;
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
 }
 
 .quote-text::before,
 .quote-text::after {
   content: '"';
-  font-size: 2rem;
-  color: var(--primary-400);
+  font-size: 3rem;
+  color: var(--primary-500);
   position: absolute;
   font-family: serif;
+  font-weight: 700;
+  text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.8);
 }
 
 .quote-text::before {
-  top: -10px;
-  left: -20px;
+  top: -15px;
+  left: -25px;
 }
 
 .quote-text::after {
-  bottom: -20px;
-  right: -20px;
+  bottom: -25px;
+  right: -25px;
 }
 
 .quote-attribution {
@@ -148,12 +194,16 @@
 .quote-dash {
   color: var(--neutral-400);
   font-weight: 300;
+  font-size: 1.5rem;
 }
 
 .quote-mystery {
   color: var(--primary-600);
-  font-weight: 600;
+  font-weight: 700;
   font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
 }
 
 /* Answer Section */
@@ -164,8 +214,6 @@
 .answer-form {
   background: white;
   padding: var(--space-8);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-lg);
 }
 
 .answer-label {
@@ -173,32 +221,35 @@
   align-items: center;
   gap: var(--space-2);
   font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--neutral-700);
+  font-weight: 700;
+  color: var(--manga-black);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .label-icon {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
 }
 
 .answer-input {
   font-size: 1.125rem;
   padding: var(--space-4);
   text-align: center;
-  border: 2px solid var(--neutral-200);
-  transition: all var(--transition-fast);
   margin-bottom: var(--space-6);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .answer-input:focus {
-  border-color: var(--primary-500);
-  box-shadow: 0 0 0 3px var(--primary-100);
   transform: scale(1.02);
+  box-shadow: var(--shadow-power);
 }
 
 .answer-input.error {
-  border-color: var(--error-400);
-  box-shadow: 0 0 0 3px var(--error-100);
+  border-color: var(--error-500);
+  box-shadow: 0 0 15px var(--error-300);
+  animation: manga-pop 0.3s ease-out;
 }
 
 .action-buttons {
@@ -208,30 +259,33 @@
 }
 
 .submit-btn {
-  min-width: 180px;
+  min-width: 200px;
+  font-weight: 700;
 }
 
 .skip-btn {
-  min-width: 140px;
+  min-width: 160px;
 }
 
 .btn-icon {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
 }
 
 /* Results Summary */
 .results-summary {
   background: white;
   padding: var(--space-6);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-md);
   margin-bottom: var(--space-8);
 }
 
 .results-summary h3 {
   text-align: center;
   margin-bottom: var(--space-4);
-  color: var(--neutral-800);
+  color: var(--manga-black);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.8);
 }
 
 .results-grid {
@@ -249,27 +303,36 @@
   padding: var(--space-3);
   border-radius: var(--radius-lg);
   background: var(--neutral-100);
-  min-width: 60px;
-  transition: all var(--transition-fast);
+  min-width: 70px;
+  transition: all var(--transition-bounce);
+  border: 2px solid var(--neutral-300);
+  box-shadow: var(--shadow-manga);
 }
 
 .result-item.correct {
-  background: var(--success-100);
+  background: linear-gradient(135deg, var(--success-100), var(--success-200));
+  border-color: var(--success-500);
   color: var(--success-800);
+  transform: scale(1.05);
+  box-shadow: 0 0 15px var(--success-300);
 }
 
 .result-item.incorrect {
-  background: var(--error-100);
+  background: linear-gradient(135deg, var(--error-100), var(--error-200));
+  border-color: var(--error-500);
   color: var(--error-800);
+  transform: scale(0.95);
+  box-shadow: 0 0 15px var(--error-300);
 }
 
 .result-number {
-  font-weight: 600;
-  font-size: 0.875rem;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
 }
 
 .result-status {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
 }
 
 /* Quick Actions */
@@ -283,10 +346,13 @@
 /* Alert Styles */
 .alert {
   margin-bottom: var(--space-4);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .alert-icon {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
 }
 
 /* Responsive Design */
@@ -312,17 +378,22 @@
   
   .quote-text::before,
   .quote-text::after {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
   
   .quote-text::before {
-    top: -5px;
-    left: -15px;
+    top: -10px;
+    left: -20px;
   }
   
   .quote-text::after {
-    bottom: -15px;
-    right: -15px;
+    bottom: -20px;
+    right: -20px;
+  }
+  
+  .mystery-character {
+    width: 80px;
+    height: 80px;
   }
   
   .action-buttons {
@@ -344,7 +415,7 @@
   }
   
   .result-item {
-    min-width: 50px;
+    min-width: 60px;
     padding: var(--space-2);
   }
 }
@@ -368,5 +439,9 @@
   
   .answer-input {
     font-size: 1rem;
+  }
+  
+  .quiz-title {
+    font-size: 1.5rem;
   }
 }
