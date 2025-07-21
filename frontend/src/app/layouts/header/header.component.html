@@ -1,1 +1,23 @@
-<p>header works!</p>
+<header class="header">
+  <div class="container">
+    <div class="header-content">
+      <div class="logo">
+        <h1 class="logo-text">
+          <span class="logo-icon">🧠</span>
+          QuizMaster
+        </h1>
+      </div>
+      <nav class="nav">
+        <a routerLink="/" class="nav-link" routerLinkActive="nav-link-active" [routerLinkActiveOptions]="{exact: true}">
+          Home
+        </a>
+        <a routerLink="/quote" class="nav-link" routerLinkActive="nav-link-active">
+          Quote Quiz
+        </a>
+        <a routerLink="/leaderboard" class="nav-link" routerLinkActive="nav-link-active">
+          Leaderboard
+        </a>
+      </nav>
+    </div>
+  </div>
+</header>

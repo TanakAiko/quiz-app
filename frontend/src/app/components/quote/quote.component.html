@@ -1,31 +1,147 @@
-@if (!isLoading && !showLevelTransition && currentQuote) {
-<div class="challenge-container">
+<div class="quote-container">
+  <div class="container-sm">
+    <!-- Loading State -->
+    @if (isLoading) {
+    <div class="loading-state">
+      <div class="loading-spinner">
+        <div class="spinner"></div>
+      </div>
+      <h2>Loading Quotes...</h2>
+      <p>Preparing your challenge</p>
+    </div>
+    }
 
-    <p>quote of the days</p>
+    <!-- Level Transition -->
+    @if (showLevelTransition) {
+    <div class="transition-state">
+      <div class="success-animation">
+        <span class="success-icon">🎉</span>
+      </div>
+      <h2>Excellent!</h2>
+      <p>Moving to the next quote...</p>
+    </div>
+    }
 
-    <p>{{currentQuote.quote}}</p>
-    <form [formGroup]="quoteForm" (ngSubmit)="submitAuthor()">
-        <label for="authorName">Enter the author's name:</label>
-        <input type="text" id="authorName" placeholder="Author's name" formControlName="author" class="text-input">
-
-        <br>
-
-        <!-- Error Message -->
-        @if (errorMessage) {
-        <div class="error-message">
-            <span class="error-icon">⚠</span>
-            {{ errorMessage }}
+    <!-- Main Quiz Interface -->
+    @if (!isLoading && !showLevelTransition && currentQuote) {
+    <div class="quiz-interface animate-fade-in">
+      <!-- Progress Header -->
+      <div class="progress-header">
+        <div class="level-info">
+          <span class="level-badge">Quote {{ currentLevel + 1 }} of 5</span>
+          <h1 class="quiz-title">Quote Challenge</h1>
         </div>
-        }
+        
+        <div class="progress-container">
+          <div class="progress">
+            <div 
+              class="progress-bar" 
+              [style.width.%]="getProgressPercentage()"
+            ></div>
+          </div>
+          <span class="progress-text">{{ getProgressPercentage() }}% Complete</span>
+        </div>
+      </div>
 
-        <button type="submit" [disabled]="isSubmitting">Submit</button>
-    </form>
+      <!-- Quote Card -->
+      <div class="quote-card card">
+        <div class="card-body">
+          <div class="quote-content">
+            <div class="quote-icon">💭</div>
+            <blockquote class="quote-text">
+              "{{ currentQuote.quote }}"
+            </blockquote>
+            <div class="quote-attribution">
+              <span class="quote-dash">—</span>
+              <span class="quote-mystery">Who said this?</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <br>
+      <!-- Answer Form -->
+      <div class="answer-section">
+        <form [formGroup]="quoteForm" (ngSubmit)="submitAuthor()" class="answer-form">
+          <div class="form-group">
+            <label for="authorName" class="answer-label">
+              <span class="label-icon">✍️</span>
+              Enter the author's name:
+            </label>
+            <input 
+              type="text" 
+              id="authorName" 
+              placeholder="Type the author's name..." 
+              formControlName="author" 
+              class="answer-input"
+              [class.error]="errorMessage"
+            >
+          </div>
 
-    <form (ngSubmit)="skipQuote()">
-        <p>Click on the button below to pass to another one !</p>
-        <button type="submit">Skip</button>
-    </form>
+          <!-- Error Message -->
+          @if (errorMessage) {
+          <div class="alert alert-error">
+            <span class="alert-icon">⚠️</span>
+            {{ errorMessage }}
+          </div>
+          }
+
+          <!-- Action Buttons -->
+          <div class="action-buttons">
+            <button 
+              type="submit" 
+              [disabled]="isSubmitting || !quoteForm.get('author')?.value?.trim()" 
+              class="btn btn-primary btn-lg submit-btn"
+            >
+              @if (isSubmitting) {
+                <span class="loading"></span>
+                Checking...
+              } @else {
+                <span class="btn-icon">🎯</span>
+                Submit Answer
+              }
+            </button>
+            
+            <button 
+              type="button"
+              (click)="skipQuote()" 
+              class="btn btn-secondary skip-btn"
+            >
+              <span class="btn-icon">⏭️</span>
+              Skip This Quote
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Results Summary -->
+      @if (Object.keys(results).length > 0) {
+      <div class="results-summary">
+        <h3>Your Progress</h3>
+        <div class="results-grid">
+          @for (result of Object.keys(results); track result) {
+          <div class="result-item" [class.correct]="results[+result]" [class.incorrect]="results[+result] === false">
+            <span class="result-number">{{ +result + 1 }}</span>
+            <span class="result-status">
+              {{ results[+result] === true ? '✅' : results[+result] === false ? '❌' : '⏳' }}
+            </span>
+          </div>
+          }
+        </div>
+      </div>
+      }
+
+      <!-- Quick Actions -->
+      <div class="quick-actions">
+        <button (click)="restart()" class="btn btn-secondary">
+          <span class="btn-icon">🔄</span>
+          Restart Quiz
+        </button>
+        <button (click)="goHome()" class="btn btn-secondary">
+          <span class="btn-icon">🏠</span>
+          Go Home
+        </button>
+      </div>
+    </div>
+    }
+  </div>
 </div>
-}

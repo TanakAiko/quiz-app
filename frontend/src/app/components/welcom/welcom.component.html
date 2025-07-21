@@ -1,10 +1,97 @@
-<h2>Welcome to our quiz game</h2>
-
-<form #welcomeForm="ngForm" (ngSubmit)="startGame()">
-    <label for="name">Enter your name:</label>
-    <input type="text" id="name" name="playerName" [(ngModel)]="playerName" required>
+<div class="welcome-container">
+  <div class="container-sm">
+    <div class="welcome-hero">
+      <div class="hero-content animate-fade-in">
+        <div class="hero-icon">
+          <span class="icon-brain">🧠</span>
+          <span class="icon-sparkle">✨</span>
+        </div>
+        
+        <h1 class="hero-title">
+          Welcome to <span class="gradient-text">QuizMaster</span>
+        </h1>
+        
+        <p class="hero-description">
+          Challenge your mind with our interactive quiz platform. Test your knowledge, 
+          compete with others, and discover fascinating quotes from your favorite characters!
+        </p>
+        
+        <div class="features-grid">
+          <div class="feature-card">
+            <span class="feature-icon">🎯</span>
+            <h3>Multiple Levels</h3>
+            <p>Progressive difficulty to challenge every skill level</p>
+          </div>
+          
+          <div class="feature-card">
+            <span class="feature-icon">💭</span>
+            <h3>Quote Challenges</h3>
+            <p>Guess the authors of inspiring anime quotes</p>
+          </div>
+          
+          <div class="feature-card">
+            <span class="feature-icon">🏆</span>
+            <h3>Leaderboard</h3>
+            <p>Compete with others and track your progress</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="hero-form animate-fade-in">
+        <div class="card">
+          <div class="card-header text-center">
+            <h2>Ready to Start?</h2>
+            <p>Enter your name and begin your quiz journey!</p>
+          </div>
+          
+          <div class="card-body">
+            <form #welcomeForm="ngForm" (ngSubmit)="startGame()" class="welcome-form">
+              <div class="form-group">
+                <label for="name">Your Name</label>
+                <input 
+                  type="text" 
+                  id="name" 
+                  name="playerName" 
+                  [(ngModel)]="playerName" 
+                  required
+                  placeholder="Enter your name here..."
+                  class="name-input"
+                >
+              </div>
+              
+              <button 
+                type="submit" 
+                [disabled]="!welcomeForm.valid" 
+                class="btn btn-primary btn-lg start-button"
+              >
+                <span class="button-icon">🚀</span>
+                Start Your Journey
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     
-    <br>
-    <p>Click on the button below to start the game</p>
-    <button type="submit" [disabled]="!welcomeForm.valid">Start Game</button>
-</form>
+    <div class="stats-section">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-number">1000+</span>
+          <span class="stat-label">Questions</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">50+</span>
+          <span class="stat-label">Categories</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">10K+</span>
+          <span class="stat-label">Players</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">24/7</span>
+          <span class="stat-label">Available</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

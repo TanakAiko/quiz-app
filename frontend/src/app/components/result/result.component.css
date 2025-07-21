@@ -1,0 +1,460 @@
+.result-container {
+  min-height: calc(100vh - 200px);
+  padding: var(--space-8) 0;
+}
+
+.result-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+/* Result Header */
+.result-header {
+  text-align: center;
+  padding: var(--space-8);
+  background: white;
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.result-animation {
+  position: relative;
+  margin-bottom: var(--space-6);
+}
+
+.result-icon {
+  font-size: 4rem;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+.confetti {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.confetti-piece {
+  position: absolute;
+  font-size: 1.5rem;
+  animation: confetti-fall 3s ease-in-out infinite;
+}
+
+.confetti-piece:nth-child(1) {
+  left: -60px;
+  animation-delay: 0s;
+}
+
+.confetti-piece:nth-child(2) {
+  left: -20px;
+  animation-delay: 0.5s;
+}
+
+.confetti-piece:nth-child(3) {
+  left: 20px;
+  animation-delay: 1s;
+}
+
+.confetti-piece:nth-child(4) {
+  left: 60px;
+  animation-delay: 1.5s;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.result-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 var(--space-3) 0;
+  background: linear-gradient(135deg, var(--primary-500), var(--secondary-500));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.result-subtitle {
+  font-size: 1.25rem;
+  color: var(--neutral-600);
+  margin: 0;
+}
+
+/* Results Card */
+.results-card {
+  background: linear-gradient(135deg, var(--success-50), var(--primary-50));
+  border: 2px solid var(--success-200);
+}
+
+.score-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+.score-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: conic-gradient(var(--success-500) 80%, var(--neutral-200) 80%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.score-inner {
+  width: 90px;
+  height: 90px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.score-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--success-600);
+}
+
+.score-total {
+  font-size: 1rem;
+  color: var(--neutral-500);
+}
+
+.score-details {
+  text-align: center;
+}
+
+.score-percentage {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--success-600);
+  margin-bottom: var(--space-2);
+}
+
+.score-label {
+  font-size: 1.125rem;
+  color: var(--neutral-600);
+  font-weight: 500;
+}
+
+.performance-stats {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-3);
+  background: white;
+  border-radius: var(--radius-lg);
+}
+
+.stat-label {
+  font-weight: 500;
+  color: var(--neutral-700);
+}
+
+.stat-value {
+  font-weight: 600;
+}
+
+.stat-value.correct {
+  color: var(--success-600);
+}
+
+.stat-value.incorrect {
+  color: var(--error-600);
+}
+
+/* Achievements */
+.achievements-section {
+  background: white;
+  padding: var(--space-6);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.achievements-section h3 {
+  text-align: center;
+  margin-bottom: var(--space-6);
+  color: var(--neutral-800);
+}
+
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-4);
+}
+
+.badge-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--neutral-100);
+  transition: all var(--transition-fast);
+  opacity: 0.5;
+}
+
+.badge-item.earned {
+  background: linear-gradient(135deg, var(--warning-100), var(--warning-50));
+  border: 2px solid var(--warning-300);
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+.badge-icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-2);
+}
+
+.badge-name {
+  font-weight: 600;
+  color: var(--neutral-800);
+  margin-bottom: var(--space-1);
+}
+
+.badge-desc {
+  font-size: 0.875rem;
+  color: var(--neutral-600);
+}
+
+/* Detailed Results */
+.detailed-results {
+  background: white;
+  padding: var(--space-6);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.detailed-results h3 {
+  text-align: center;
+  margin-bottom: var(--space-6);
+  color: var(--neutral-800);
+}
+
+.questions-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.question-item {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--neutral-200);
+  transition: all var(--transition-fast);
+}
+
+.question-item.correct {
+  border-color: var(--success-300);
+  background: var(--success-50);
+}
+
+.question-item.incorrect {
+  border-color: var(--error-300);
+  background: var(--error-50);
+}
+
+.question-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.question-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--neutral-200);
+  border-radius: 50%;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.question-item.correct .question-number {
+  background: var(--success-200);
+  color: var(--success-800);
+}
+
+.question-item.incorrect .question-number {
+  background: var(--error-200);
+  color: var(--error-800);
+}
+
+.question-status {
+  font-size: 1.25rem;
+}
+
+.question-content {
+  flex: 1;
+}
+
+.question-quote {
+  font-style: italic;
+  font-size: 1.125rem;
+  color: var(--neutral-800);
+  margin-bottom: var(--space-3);
+  line-height: 1.5;
+}
+
+.question-answer,
+.correct-answer {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.answer-label,
+.correct-label {
+  font-weight: 500;
+  color: var(--neutral-600);
+  min-width: 100px;
+}
+
+.answer-text.correct {
+  color: var(--success-700);
+  font-weight: 600;
+}
+
+.answer-text.incorrect {
+  color: var(--error-700);
+  font-weight: 600;
+}
+
+.correct-text {
+  color: var(--success-700);
+  font-weight: 600;
+}
+
+/* Result Actions */
+.result-actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.btn-icon {
+  font-size: 1.125rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .result-container {
+    padding: var(--space-4) 0;
+  }
+  
+  .result-content {
+    gap: var(--space-6);
+  }
+  
+  .result-title {
+    font-size: 2rem;
+  }
+  
+  .result-subtitle {
+    font-size: 1.125rem;
+  }
+  
+  .score-display {
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  
+  .score-circle {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .score-inner {
+    width: 75px;
+    height: 75px;
+  }
+  
+  .score-number {
+    font-size: 1.5rem;
+  }
+  
+  .score-percentage {
+    font-size: 2rem;
+  }
+  
+  .badges-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+  
+  .question-item {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  
+  .question-header {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  
+  .result-actions {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .result-header {
+    padding: var(--space-6);
+  }
+  
+  .result-icon {
+    font-size: 3rem;
+  }
+  
+  .result-title {
+    font-size: 1.75rem;
+  }
+  
+  .badges-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .question-answer,
+  .correct-answer {
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  
+  .answer-label,
+  .correct-label {
+    min-width: auto;
+    font-size: 0.875rem;
+  }
+}

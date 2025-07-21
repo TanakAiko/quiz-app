@@ -1,1 +1,125 @@
-<p>Hello {{ playerName }}! Let's start the quiz!</p>
+<div class="quiz-container">
+  <div class="container-sm">
+    <div class="quiz-welcome animate-fade-in">
+      <div class="welcome-header">
+        <div class="player-avatar">
+          <span class="avatar-icon">👤</span>
+        </div>
+        <div class="welcome-content">
+          <h1 class="welcome-title">
+            Hello, <span class="player-name">{{ playerName }}</span>! 🎉
+          </h1>
+          <p class="welcome-subtitle">
+            Ready to challenge your mind? Let's start your quiz journey!
+          </p>
+        </div>
+      </div>
+
+      <div class="quiz-modes">
+        <h2 class="modes-title">Choose Your Challenge</h2>
+        <div class="modes-grid">
+          
+          <div class="mode-card card">
+            <div class="card-body">
+              <div class="mode-icon">💭</div>
+              <h3 class="mode-title">Quote Master</h3>
+              <p class="mode-description">
+                Test your knowledge of famous anime quotes. Can you identify who said what?
+              </p>
+              <div class="mode-stats">
+                <span class="stat">5 Questions</span>
+                <span class="stat">Medium Difficulty</span>
+              </div>
+              <a routerLink="/quote" class="btn btn-primary mode-button">
+                <span class="btn-icon">🚀</span>
+                Start Quote Quiz
+              </a>
+            </div>
+          </div>
+
+          <div class="mode-card card coming-soon">
+            <div class="card-body">
+              <div class="mode-icon">🧮</div>
+              <h3 class="mode-title">Math Challenge</h3>
+              <p class="mode-description">
+                Solve mathematical problems and test your numerical skills.
+              </p>
+              <div class="mode-stats">
+                <span class="stat">10 Questions</span>
+                <span class="stat">Progressive</span>
+              </div>
+              <button class="btn btn-secondary mode-button" disabled>
+                <span class="btn-icon">🔒</span>
+                Coming Soon
+              </button>
+            </div>
+            <div class="coming-soon-badge">
+              <span>Coming Soon</span>
+            </div>
+          </div>
+
+          <div class="mode-card card coming-soon">
+            <div class="card-body">
+              <div class="mode-icon">🖼️</div>
+              <h3 class="mode-title">Image Quiz</h3>
+              <p class="mode-description">
+                Identify objects, characters, and scenes from various images.
+              </p>
+              <div class="mode-stats">
+                <span class="stat">15 Questions</span>
+                <span class="stat">Visual Challenge</span>
+              </div>
+              <button class="btn btn-secondary mode-button" disabled>
+                <span class="btn-icon">🔒</span>
+                Coming Soon
+              </button>
+            </div>
+            <div class="coming-soon-badge">
+              <span>Coming Soon</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="player-stats">
+        <div class="stats-card card">
+          <div class="card-header">
+            <h3>Your Stats</h3>
+          </div>
+          <div class="card-body">
+            <div class="stats-grid">
+              <div class="stat-item">
+                <span class="stat-value">0</span>
+                <span class="stat-label">Quizzes Completed</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">0%</span>
+                <span class="stat-label">Success Rate</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">-</span>
+                <span class="stat-label">Best Time</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">Beginner</span>
+                <span class="stat-label">Level</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-actions">
+        <a routerLink="/" class="btn btn-secondary">
+          <span class="btn-icon">🏠</span>
+          Back to Home
+        </a>
+        <a routerLink="/leaderboard" class="btn btn-secondary">
+          <span class="btn-icon">🏆</span>
+          View Leaderboard
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
