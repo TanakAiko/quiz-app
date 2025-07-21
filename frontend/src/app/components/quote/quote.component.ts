@@ -28,6 +28,8 @@ export class QuoteComponent implements OnInit, OnDestroy {
   results: { [key: number]: boolean | null } = {};
   quotes: { [key: number]: Quote } = {};
 
+  // Expose Object to template
+  Object = Object;
 
   quoteService = inject(QuoteService);
   stateService = inject(StateService);
